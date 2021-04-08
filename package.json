@@ -6,7 +6,7 @@
   "bin": {
     "srcmap-unpkg": "dist/index.js"
   },
-  "files":  [
+  "files": [
     "*.md",
     "dist"
   ],

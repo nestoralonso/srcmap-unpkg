@@ -7,9 +7,9 @@ interface ExtractionOptions {
     writeMeta: boolean
     srcIgnorePattern: string
 }
-export async function processAllFiles(paths: string[], out: string, opts: ExtractionOptions) {
+export async function processAllFiles(paths: string[], outdir: string, opts: ExtractionOptions) {
     for (const p of paths) {
-        await processMapFile(p, out, opts);
+        await processMapFile(p, outdir, opts);
     }
 }
 
@@ -17,7 +17,7 @@ async function writeFile(originalPath: string, content: string, outdir: string) 
     const sourcePath = sanityzePath(originalPath)
     const finalFilePath = path.join(outdir, sourcePath)
 
-    console.log("🦊>>>> ~ ", { originalPath, finalFilePath, outdir })
+    console.log("🦊 Writing ", originalPath)
     const dirpath = path.dirname(finalFilePath)
     await fs.mkdir(dirpath, { recursive: true })
     return fs.writeFile(finalFilePath, content)
@@ -34,7 +34,7 @@ async function processMapFile(mapPath: string, out: string, opts: ExtractionOpti
     const { sources, sourcesContent = [], file } = map;
     const ignoreSourceRegex = new RegExp(opts.srcIgnorePattern)
     const promises = [];
-    console.log("🦊>>>> ~ processMapFile ~ opts", opts)
+    console.log("🦊>>>> ~ processing", mapPath)
     for (let i = 0; i < sources.length; i++) {
         const srcPath = sources[i]
 

@@ -11,7 +11,7 @@ OPTIONS:
     -v, --version             Print version
     -i, --src-ignore-pattern  Ignore pattern for source files (default: node_modules)
     -m, --write-meta          Include meta information about the file as footer
-    -o, --outdir path         Output directory (default: ./out)`;
+    -o, --outdir path         Output Directory (default: ./out)`;
 
 
     const argv = parseArgs(process.argv.slice(2), {
@@ -24,7 +24,7 @@ OPTIONS:
         'write-meta': 'm'
     },
     default: {
-        output: 'out',
+        outdir: 'out',
         'src-ignore-pattern': 'node_modules',
         'write-meta': true,
     },
@@ -49,4 +49,4 @@ if (!files.length) {
 }
 
 const opts = {writeMeta: argv['write-meta'], srcIgnorePattern: argv['src-ignore-pattern']}
-processAllFiles(files, path.resolve(argv.output), opts)
+processAllFiles(files, path.resolve(argv.outdir), opts)
